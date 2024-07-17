@@ -1,0 +1,8 @@
+cache/
+artifacts/
+node_modules/
+.env
+artifacts
+env/
+lucas/__pycache__/
+requirements.txt
