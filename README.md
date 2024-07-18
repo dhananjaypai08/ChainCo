@@ -34,9 +34,9 @@ deployed on the following networks:
 
 | Network | Address |
 | --- | --- |
-| Inco Genetry Testnet | [0x70B066d68D78cF29f49f67eC2ecEa77877b26e25](explorer.testnet.inco.org/address/0x70B066d68D78cF29f49f67eC2ecEa77877b26e25) |
+| Inco Genetry Testnet | [0x70B066d68D78cF29f49f67eC2ecEa77877b26e25](https://explorer.testnet.inco.org/address/0x70B066d68D78cF29f49f67eC2ecEa77877b26e25) |
 | Polygon ZKEVM Cardona Testnet | [0xf3704893c6beAAF1335A05582eb9aa2Ba417a807](https://cardona-zkevm.polygonscan.com/tx/0x85346463083111dc26e90d96b004e9200a4ded53fa64698137d36ab20667ba0b) |
-| Sepolia | [0x61eFE56495356973B350508f793A50B7529FF978](https://https://goerli.arbiscan.io//address/0x61eFE56495356973B350508f793A50B7529FF978) |
+| Sepolia | [0x61eFE56495356973B350508f793A50B7529FF978](https://goerli.arbiscan.io//address/0x61eFE56495356973B350508f793A50B7529FF978) |
 
 ## Built Using  
   - ChainFlip
