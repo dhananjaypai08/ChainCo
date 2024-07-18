@@ -1,5 +1,5 @@
 # ChainCo
-  - ChainCo is a perimissionless, composable and confidential protocol which helps in secure storage of supreme documents with high confidentiality and cross-chain support 
+  - ChainCo is a perimissionless, composable and confidential protocol which helps in owning, digitization and storing of supreme documents with high confidentiality and cross-chain support 
 
 ## Aim
 
