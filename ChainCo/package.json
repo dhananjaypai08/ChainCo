@@ -10,6 +10,7 @@
     "axios": "^1.7.2",
     "chart.js": "^4.4.1",
     "dangerous-html": "0.1.13",
+    "fhevmjs": "^0.5.2",
     "ipfs-http-client": "^50.1.2",
     "mime": "^4.0.0",
     "multihashes": "^4.0.3",
