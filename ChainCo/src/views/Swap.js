@@ -28,6 +28,7 @@ const Swap = () => {
   const [stockpriceinfiat, setStockPriceinFiat] = useState();
   const [cryptopriceinfiat, setCryptoVal] = useState();
 
+
   const checkConnectionBeforeConnecting = () => {
     if(!isConnected){
       connectWallet();
@@ -35,7 +36,7 @@ const Swap = () => {
   }
   const desiredChainId = 11155111;
   const connectWallet = async () => {
-    const contractAddress = "0x0aE8D798A5E7Ecc88dF127743F570285eC80c746"//"0x8264a7B7d02ab5eF1e57d0ad10110686D79d8d46"//"0x681a204B065604B2b2611D0916Dca94b992f0B41"//"0x816df2a69bB2D246B1ee5a4F2d1B3EbcB3aF7C85";//"0x61eFE56495356973B350508f793A50B7529FF978"
+    const contractAddress = "0x8264a7B7d02ab5eF1e57d0ad10110686D79d8d46" //"0x70B066d68D78cF29f49f67eC2ecEa77877b26e25"//"0x681a204B065604B2b2611D0916Dca94b992f0B41"//"0x816df2a69bB2D246B1ee5a4F2d1B3EbcB3aF7C85";//"0x61eFE56495356973B350508f793A50B7529FF978"
     const contractAbi = abi.abi;
     try {
       const { ethereum } = window;
@@ -191,59 +192,11 @@ const Swap = () => {
         setEstimatedOutputmsg(`Estimated Output is : ${AmtOutput} ETH`);
         setEstimation(true); 
         setLoader(false);
-        setEstimatedVal(AmtOutput);
-        // const gasPrice = await provider.getGasPrice();
-        // const nonce = await provider.getTransactionCount(accountAddress, "latest");
-        // const value = ethers.utils.parseEther(AmtOutput.toString());
-        // //console.log(gasPrice, accountAddress, value, nonce, ethers.utils.hexlify(gasPrice))
-        // const tx = {
-        //   from: accountAddress,
-        //   to: response.data["DepositAddress"],
-        //   value: value,
-        //   nonce: nonce,
-        //   gasLimit: ethers.utils.hexlify(gasPrice), // 100000
-        //   gasPrice: gasPrice,
-        // }
-        // try{
-        //   signer.sendTransaction(tx).then((transaction) => {
-        //     console.log(transaction);
-        //     alert("Send finished!");
-        //   })
-        // } catch{
-        //   alert('Something went wrong');
-        // }
-        
+        setEstimatedVal(AmtOutput);    
 
     }
   };
 
-  const DepositToken = async() => {
-    let amt;
-    if(fromToken == 'USDC'){
-        amt = (amount*1e6);
-    } else{
-        amt = (amount*1e18);
-    }
-    const txParams = {
-        from: accountAddress, // Get user's current address
-        to: depositAddress,
-        value: amt, // Convert amount to Wei (smallest unit of ETH)
-        gasLimit: 8117, // Let MetaMask estimate gas
-      };
-  
-    const tx = await signer.sendTransaction(txParams);
-    let receipt;
-    while (!receipt) {
-        try {
-        receipt = await provider.getTransactionReceipt(tx.hash);
-        } catch (error) {
-        console.error('Error fetching receipt:', error);
-        }
-    }
-    setTransactionConfirmed(true);
-    window.alert("Transaction has been confirmed!")
-    console.log(`Transaction confirmed! txHash: ${txHash}`);
-  }
 
   return (
     <> <br></br>

@@ -33,7 +33,6 @@ const Multiple = () => {
     const [descriptionArray, setDescriptionArray] = useState([]);
     const [isConnected, setConnection] = useState(false);
     const [connectmsg, setMsg] = useState("Connect Wallet");
-    console.log(axios, apiKey);
     
     const handlePhotoSelect = (event) => {
         setFile(event.target.files[0]);
@@ -92,7 +91,7 @@ const Multiple = () => {
         console.log(resp)
     } 
     const connectWallet = async () => {
-      const contractAddress = "0x8264a7B7d02ab5eF1e57d0ad10110686D79d8d46"//"0x0aE8D798A5E7Ecc88dF127743F570285eC80c746"//"0x8264a7B7d02ab5eF1e57d0ad10110686D79d8d46"//"0x681a204B065604B2b2611D0916Dca94b992f0B41"//"0x816df2a69bB2D246B1ee5a4F2d1B3EbcB3aF7C85";//"0x61eFE56495356973B350508f793A50B7529FF978"
+      const contractAddress = "0x70B066d68D78cF29f49f67eC2ecEa77877b26e25"//"0x70B066d68D78cF29f49f67eC2ecEa77877b26e25"//"0x8264a7B7d02ab5eF1e57d0ad10110686D79d8d46"//"0x681a204B065604B2b2611D0916Dca94b992f0B41"//"0x816df2a69bB2D246B1ee5a4F2d1B3EbcB3aF7C85";//"0x61eFE56495356973B350508f793A50B7529FF978"
       const contractAbi = abi.abi;
       try {
         const { ethereum } = window;
