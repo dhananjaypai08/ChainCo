@@ -11,6 +11,8 @@ import { Bar } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
 import "./home.css";
 import { useAppContext } from "../AppContext";
+const { createInstance } = require("fhevmjs");
+
 
 const ReputationSystem = (props) => {
   const { state, setState } = useAppContext()
@@ -26,12 +28,12 @@ const ReputationSystem = (props) => {
   const [curr_endorsements_received, setEndorsementReceived] = useState(0);
   const [curr_endorsements_given, setEndorsementGiven] = useState(0);
   const [curr_reputation, setCurReputation] = useState(0);
+  const CONTRACT_ADDRESS = "0x70B066d68D78cF29f49f67eC2ecEa77877b26e25"
   const leaderboardData = accounts.map((account, index) => ({
     account,
     score: reputation_score[index],}))
-    leaderboardData.sort((a, b) => b.score - a.score);
+  leaderboardData.sort((a, b) => b.score - a.score);
   
-
   const nftipfsAddress = "https://gateway.lighthouse.storage/ipfs/";
   const randomColor = () => `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 1)`;
 
@@ -41,7 +43,10 @@ const ReputationSystem = (props) => {
     }
   }
 
+  
+
   const connectWallet = async () => {
+    const instance = await createInstance({ chainId, process.env.REACT_APP_PUBLIC_KEY });
     const contractAddress = "0x8264a7B7d02ab5eF1e57d0ad10110686D79d8d46"//"0x681a204B065604B2b2611D0916Dca94b992f0B41";//"0x61eFE56495356973B350508f793A50B7529FF978";
     const contractAbi = abi.abi;
     try {
@@ -82,7 +87,10 @@ const ReputationSystem = (props) => {
         let total_acc_score = 0;
         let score = 0;
         for(let i = 0; i<all_accounts.length; i++){
-            const sbt_score = await contractwithsigner.repute_score(all_accounts[i]);
+            let sbt_score = await contractwithsigner.repute_score(all_accounts[i]);
+            const reencrypt = await getReencryptPublicKey(CONTRACT_ADDRESS);
+            const encryptedBalance = await contract.balanceOf(reencrypt.publicKey, reencrypt.signature);
+            sbt_score = await instance.decrypt(CONTRACT_ADDRESS, encryptedBalance)
             scores.push(sbt_score.toNumber()/100);
             console.log(all_accounts[i], account);
             if(all_accounts[i].toLowerCase() == account){
@@ -110,6 +118,36 @@ const ReputationSystem = (props) => {
     }
   };
 
+  // Get or generate the end user's local keypair.
+const getReencryptPublicKey = async (contractAddress) => {
+  if (!instance.hasKeypair(contractAddress)) {
+    const eip712Domain = {
+      // Give a user-friendly name to the specific contract you're signing for.
+      // This must match the EIP712WithModifier string in the contract constructor.
+      name: 'Authorization token',
+      // This identifies the latest version.
+      // This must match the EIP712WithModifier version in the contract constructor.
+      version: '1',
+      // This defines the network, in this case, Gentry Testnet.
+      chainId: 9090,
+      // Add a verifying contract to make sure you're establishing contracts with the proper entity.
+      verifyingContract: contractAddress,
+    }
+  
+    const reencryption = instance.generatePublicKey(eip712Domain);
+   
+    const params = [userAddress, JSON.stringify(reencryption.eip712)];
+    const sig = window.ethereum.request({
+      method: "eth_signTypedData_v4",
+      params,
+    });
+    
+    instance.setSignature(contractAddress, sig);
+  }
+
+  return instance.getPublicKey(contractAddress);
+};
+
   return (
     <div className="home-container">
       <Helmet>
@@ -118,7 +156,7 @@ const ReputationSystem = (props) => {
       </Helmet>
       <header data-thq="thq-navbar" className="home-navbar">
         <span className="home-logo"><a  href="/">
-              DeCAT
+              ChainCo
             </a></span>
         <div
           data-thq="thq-navbar-nav"
@@ -162,7 +200,7 @@ const ReputationSystem = (props) => {
             className="home-nav1"
           >
             <div className="home-container1">
-              <span className="home-logo1">DeCAT</span>
+              <span className="home-logo1">ChainCo</span>
               <div data-thq="thq-close-menu" className="home-menu-close">
                 <svg viewBox="0 0 1024 1024" className="home-icon02">
                   <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
@@ -203,7 +241,7 @@ const ReputationSystem = (props) => {
         <h1 className="home-header">Please connect Wallet.</h1>
         </div>}
       </section>
-      {isConnected && <label className='mint-btn button'>Total DeCAT's Volume: {totalmints}
+      {isConnected && <label className='mint-btn button'>Total ChainCo's Volume: {totalmints}
       </label>}
       {isConnected && <label className='home-button7 button'>Total SBT's shared to your Account: {curr_endorsements_received} <br></br>
       Total SBT's shared by you: {curr_endorsements_given} <br></br>

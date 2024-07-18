@@ -130,7 +130,7 @@ const JobsAvailable = (props) => {
       </Helmet>
       <header data-thq="thq-navbar" className="home-navbar">
         <span className="home-logo"><a  href="/">
-              DeCAT
+              ChainCo
             </a></span>
         <div
           data-thq="thq-navbar-nav"
@@ -177,7 +177,7 @@ const JobsAvailable = (props) => {
             className="home-nav1"
           >
             <div className="home-container1">
-              <span className="home-logo1">DeCAT</span>
+              <span className="home-logo1">ChainCo</span>
               <div data-thq="thq-close-menu" className="home-menu-close">
                 <svg viewBox="0 0 1024 1024" className="home-icon02">
                   <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
@@ -218,7 +218,7 @@ const JobsAvailable = (props) => {
         <h1 className="home-header">Please connect Wallet.</h1>
         </div>}
       </section>
-      {isConnected && <label className='mint-btn button'>Total DeCAT's Volume: {totalmints}
+      {isConnected && <label className='mint-btn button'>Total ChainCo's Volume: {totalmints}
       </label>}
       {/* {isConnected && <label className='home-button7 button'>Total SBT's shared to your Account: {curr_endorsements_received} <br></br>
       Total SBT's shared by you: {curr_endorsements_given} <br></br>
